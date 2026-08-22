@@ -187,3 +187,25 @@ def login():
         )
 ```
 
+
+## Authorization
+
+```
+class Post(models.Model):
+    author = models.OneToOneField(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+
+class IsAuthorForUpdate(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in ("PUT", "PATCH"):
+            return obj.author == request.user
+
+        return True
+
+class PostDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated, IsAuthorForUpdate]
+```
+
