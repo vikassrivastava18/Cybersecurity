@@ -4,8 +4,9 @@
 
 ## Assignment
 <p>Update the code to make registration secure.
-Implement hashing algorithms like SHA-256 and then more secured like algorithms like PBKDF2 salting.
-Use below code snippet</p>
+Implement hashing algorithms like SHA-256 and then more secured like algorithms like PBKDF2 salting.</p>
+<p>Use below code snippet</p>
+
 
 ```
 import hashlib
@@ -25,6 +26,7 @@ def hash_password(password: str) -> tuple[bytes, bytes]:
         600000
     )
     return salt, hashed_password
+
 
 def verify_password(stored_salt: bytes, stored_hash: bytes, provided_password: str) -> bool:
     """Re-hashes the input password with the stored salt to verify it."""
