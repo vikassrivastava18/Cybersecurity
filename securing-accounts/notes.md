@@ -3,8 +3,8 @@
 - Adding some strong password validation, like minimum characters should be added.
 
 ## Assignment
-<p>Update the code to make registration secure. 
-Try hashing algorithms like SHA-256 and then more secured like algorithms like salting
+<p>Update the code to make registration secure.
+Implement hashing algorithms like SHA-256 and then more secured like algorithms like PBKDF2 salting
 
 ```
 import hashlib
