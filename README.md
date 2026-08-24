@@ -1,6 +1,6 @@
 # Cybersecurity
 
-<p>Notes on cybersecurity with demonstrable code snippets for building secure applications</p>
+<p>Notes on cybersecurity with demonstrable code snippets and assignments for building secure applications</p>
 
 
 ## Securing Accounts
