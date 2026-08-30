@@ -1,5 +1,5 @@
 ## Securing accounts
-- Adding some strong password validation, like minimum characters, special characters present help in securing an account.
+- Adding some strong password validation, like minimum characters length help in securing an account.
 - Password hashing with salting is a must for modern applications security
 
 ```

@@ -22,7 +22,6 @@ def unauthorized():
 @login_required
 def profile():
     return {"message": "You are authenticated"}
-
 ```
 
 <p> Protect all API andpoints</p>
