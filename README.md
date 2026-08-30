@@ -38,7 +38,7 @@ Help transition to a more secure system step by step.
 
 ### Task 4
 <p> A company has an internal gift store app where the employees can use their awarded coins to make purchases like water bottles, chocolates, etc. The company is finding that the amount they spent on these gifts far exceeds the coins awarded to the employees. <br>Your job is to fix the bug for purchasing gifts!</p>
-<p><b>Hint</b>: Research on databses transactions.   
+<p><b>Hint</b>: Research on databases concurrecy.   
 
 
 ### Task 5
