@@ -1,5 +1,4 @@
 """Flask app entry point for user registration and database setup."""
-
 import logging
 
 from flask import Flask, redirect, render_template, request, url_for
