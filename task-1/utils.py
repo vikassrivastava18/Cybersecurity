@@ -1,8 +1,8 @@
-import hashlib
-import random, string
-from database import get_db
-import sqlite3
+import hashlib, random, string, logging, sqlite3
 
+from database import get_db
+
+logger = logging.getLogger(__name__)
 
 def md5_hash(password: str) -> str:
     return hashlib.md5(password.encode("utf-8")).hexdigest()
@@ -77,7 +77,7 @@ def insert_accounts() -> None:
 
 
 def insert_bad_accounts(file_name: str) -> None:
-    """Helper function to add"""
+    """Helper function to add bad accounts"""
 
     with open(file_name, "r", encoding="utf-8") as file:
         content = file.read()
@@ -98,6 +98,46 @@ def insert_bad_accounts(file_name: str) -> None:
                 except sqlite3.IntegrityError:
                     db.rollback()
                     print("Email already exists.")
-    
+
+
+def find_bad_accounts(file_name) -> list:
+    bad_accounts = []
+    # Scan the weak passwords
+    with open(file_name, "r", encoding="utf-8") as file:
+        bad_passwords = {
+            line.strip()
+            for line in file
+            if line.strip()
+        }
+        # Convert the passwords to MD5 hashes for comparison
+        bad_hashes = {
+            md5_hash(password): password
+            for password in bad_passwords
+        }
+
+        db = get_db()
+        users = db.execute(
+            "SELECT id, username, email, password FROM users"
+        ).fetchall()
+
+        for user in users:
+            password_hash = user["password"]
+
+            if password_hash in bad_hashes:
+                bad_accounts.append({
+                    "id": user["id"],
+                    "username": user["username"],
+                    "email": user["email"],
+                })
+
+                logger.warning(
+                    "Weak password detected for account: "
+                    "id=%s username=%s email=%s",
+                    user["id"],
+                    user["username"],
+                    user["email"],
+                )
+
+    return bad_accounts
             
 

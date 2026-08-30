@@ -1,11 +1,23 @@
 from flask import Flask, redirect, render_template, request, url_for
+import logging
 
-from database import close_db, get_db, init_db
-from utils import md5_hash, insert_bad_accounts, insert_accounts
+from database import (close_db, 
+                      get_db, 
+                      init_db)
+from utils import (md5_hash, 
+                   insert_bad_accounts, 
+                   insert_accounts, 
+                   find_bad_accounts)
 
 app = Flask(__name__)
 
 app.teardown_appcontext(close_db)
+
+logging.basicConfig(
+    filename="bad_passwords.log",
+    level=logging.WARNING,
+    format="%(asctime)s %(levelname)s %(message)s",
+)
 
 
 @app.route("/")
@@ -37,7 +49,8 @@ def add_user():
 
 if __name__ == "__main__":
     init_db()
-    # with app.app_context():
-    #     # insert_accounts()
-    #     insert_weak_accounts("static/weak.txt")
+    with app.app_context():
+        # insert_accounts()
+        find_bad_accounts("static/common.txt")
+        find_bad_accounts("static/weak.txt")
     app.run(debug=True, host="127.0.0.1", port=5000)
