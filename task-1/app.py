@@ -1,6 +1,7 @@
 from flask import Flask, redirect, render_template, request, url_for
 
 from database import close_db, get_db, init_db
+from utils import md5_hash, insert_bad_accounts, insert_accounts
 
 app = Flask(__name__)
 
@@ -20,12 +21,14 @@ def index():
 def add_user():
     username = request.form.get("username", "").strip()
     email = request.form.get("email", "").strip()
+    password = request.form.get("password")
 
-    if username and email:
+    if username and email and password:
+        pwd_md5 = md5_hash(password)
         db = get_db()
         db.execute(
             "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-            (username, email, ""),
+            (username, email, pwd_md5),
         )
         db.commit()
 
@@ -34,4 +37,7 @@ def add_user():
 
 if __name__ == "__main__":
     init_db()
+    # with app.app_context():
+    #     # insert_accounts()
+    #     insert_weak_accounts("static/weak.txt")
     app.run(debug=True, host="127.0.0.1", port=5000)
