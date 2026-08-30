@@ -11,12 +11,12 @@
 #### You job
 Help transition to a more secure system step by step.
 
-1) <p>First detect all the users with weak/common passwords so that they could be flagged immediately for a password change.</p>
+1) <p>First detect all the users with possible weak/common passwords so that they could be flagged immediately for a password change.</p>
 
-    <p>Commonly used passwords list <b>(<a href="https://en.wikipedia.org/wiki/List_of_the_most_common_passwords">source</a>)</b> - common.txt
+    <p> Use commonly used passwords list <b>(<a href="https://en.wikipedia.org/wiki/List_of_the_most_common_passwords">source</a>)</b> - common.txt
     </p>
 
-    <p>Weak passwords list <b>(<a href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/500-worst-passwords.txt">source</a>)</b> - weak.txt
+    <p> Use weak passwords list <b>(<a href="https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/500-worst-passwords.txt">source</a>)</b> - weak.txt
     </p>
     <p> <b>Note: </b>The above lists are not exhaustive and keeps updating. Also just that a passwords MD5 is not found in above lists does not necessarily mean that they have a strong password. One needs to take further steps.
 
@@ -81,10 +81,9 @@ Help transition to a more secure system step by step.
 
 
 ### Task 4
-
 <p> A company has an internal gift store app where the employees can use their awarded coins to make purchases like water bottles, chocolates, etc. The company is finding that the amount they spent on these gifts far exceeds the coins awarded to the employees. <br>Your job is to fix the bug for purchasing gifts!</p>
 <p><b>Hint</b>: Research on databses transactions.   
 
 
 ### Task 5
-<p> The blog application has a buggy API where one user is able to update another users blogs, add authorization to fix the issue. 
+<p> The blog application has a buggy API where a user is able to update another users blogs. Add authorization to fix the issue. 
