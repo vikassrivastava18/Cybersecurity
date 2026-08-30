@@ -1,13 +1,14 @@
-from flask import Flask, redirect, render_template, request, url_for
 import logging
+from flask import (Flask, 
+                   redirect, 
+                   render_template, 
+                   request, 
+                   url_for)
 
 from database import (close_db, 
                       get_db, 
                       init_db)
-from utils import (md5_hash, 
-                   insert_bad_accounts, 
-                   insert_accounts, 
-                   find_bad_accounts)
+from utils import salted_hash
 
 app = Flask(__name__)
 
@@ -36,7 +37,7 @@ def add_user():
     password = request.form.get("password")
 
     if username and email and password:
-        pwd_md5 = md5_hash(password)
+        pwd_md5 = salted_hash(password)
         db = get_db()
         db.execute(
             "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
@@ -49,8 +50,5 @@ def add_user():
 
 if __name__ == "__main__":
     init_db()
-    with app.app_context():
-        # insert_accounts()
-        find_bad_accounts("static/common.txt")
-        find_bad_accounts("static/weak.txt")
+
     app.run(debug=True, host="127.0.0.1", port=5000)

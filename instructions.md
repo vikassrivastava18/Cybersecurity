@@ -20,53 +20,9 @@ Help transition to a more secure system step by step.
     </p>
     <p> <b>Note: </b>The above lists are not exhaustive and keeps updating. Also just that a passwords MD5 is not found in above lists does not necessarily mean that they have a strong password. One needs to take further steps.
 
-2) Password validation function: Write a script to check passwords strength
+2) Password validation function: Write a script to check passwords strength. Use zxcvbn package from Dropbox to detect password strength (```pip install zxcvbn```)
 
-    ```
-    from zxcvbn import zxcvbn
-
-    MIN_LENGTH = 12
-    MAX_LENGTH = 128
-
-    def validate_password(password, user_inputs=None):
-
-        if not isinstance(password, str):
-            return False, ["Invalid password."]
-
-        if len(password) < MIN_LENGTH:
-            return False, [
-                f"Password must be at least {MIN_LENGTH} characters long."
-            ]
-
-        if len(password) > MAX_LENGTH:
-            return False, [
-                f"Password must not exceed {MAX_LENGTH} characters."
-            ]
-
-        result = zxcvbn(
-            password,
-            user_inputs=user_inputs or []
-        )
-
-        if result["score"] < 3:
-            feedback = result.get("feedback", {})
-
-            errors = []
-
-            if feedback.get("warning"):
-                errors.append(feedback["warning"])
-
-            errors.extend(feedback.get("suggestions", []))
-
-            if not errors:
-                errors.append("Password is too easy to guess.")
-
-            return False, errors
-
-        return True, []
-    ```
-
-3)  Implement hashing using ```werkzeug.security```. Everytime a user logs in successfully, create the new secure hash and save it in a new column password_secure. Once you have the secure hashes for every user, they can fully transition to the new column for password verification.
+3)  Implement hashing using ```werkzeug.security```. Once you have the secure hashes for every user, they can fully transition to the new column for password verification.
 
 
 ### Task 2
