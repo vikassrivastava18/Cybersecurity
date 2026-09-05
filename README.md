@@ -68,6 +68,156 @@ Typical steps include:
 
 Pen testing is a proactive defense. Instead of waiting to hope a system is secure, security teams actively test it to discover gaps and fix them before real attacks occur.
 
+
+
+## Software Cracking
+
+* **Software cracking** means modifying or bypassing a program's protection mechanisms.
+* Common protections targeted:
+
+  * License checks
+  * Copy protection
+  * Activation requirements
+* Cracking can allow software to be used without authorization or payment.
+* In cybersecurity/reverse engineering, studying how protections work and fail can be legitimate for defensive purposes.
+* **Password cracking** is different: it involves attempting to discover a password, often through:
+
+  * Brute-force attacks
+  * Dictionary attacks
+  * Hash guessing
+
+---
+
+## Hashing and Hash Reversal
+
+* A **cryptographic hash function** is designed to be one-way.
+* A hash is **not encryption**:
+
+  * Encryption → reversible with the appropriate key.
+  * Hashing → not intended to be reversed.
+* Attackers generally don't "reverse" a hash directly. They:
+
+  1. Guess a possible input.
+  2. Hash the guess.
+  3. Compare it with the target hash.
+* Common techniques:
+
+  * Brute force
+  * Dictionary attacks
+  * Rainbow tables
+* **Salting** adds random data before hashing, making precomputed attacks such as rainbow tables much less effective.
+* Strong passwords combined with strong hashing practices provide better security.
+
+---
+
+## Cross-Site Attacks
+
+### Cross-Site Scripting (XSS)
+
+* XSS occurs when an attacker injects malicious content, usually JavaScript, into a website.
+* The injected code can execute in other users' browsers.
+* Example cause:
+
+  * A website displays user-provided comments without properly escaping/sanitizing them.
+* **Defense:**
+
+  * Properly escape/sanitize output.
+  * Use frameworks with automatic escaping where appropriate.
+  * Apply Content Security Policy (CSP) as an additional defense.
+
+### Cross-Site Request Forgery (CSRF)
+
+* CSRF tricks an authenticated user into unknowingly sending a request to a website.
+* The attack abuses the trust a website places in the user's authenticated session.
+* **Defense:**
+
+  * Use unpredictable, session-associated **CSRF tokens**.
+  * Verify that sensitive requests are legitimate.
+
+### XSS vs CSRF
+
+| Attack | Main Target/Trust Relationship                              |
+| ------ | ----------------------------------------------------------- |
+| XSS    | Abuses a website's handling of user-controlled input        |
+| CSRF   | Abuses a website's trust in an authenticated user's browser |
+
+---
+
+## Character Escapes in Cybersecurity
+
+* **Character escaping** represents special characters in a way that prevents them from being interpreted as code or commands.
+* In security, escaping helps maintain the boundary between **data and executable code**.
+
+### Examples
+
+* HTML:
+
+  * `<` → `&lt;`
+  * `>` → `&gt;`
+  * `"` → `&quot;`
+* Shell commands may give special meaning to characters such as:
+
+  * `;`
+  * `|`
+  * `&`
+* SQL uses characters such as `'` that can become dangerous when input is improperly incorporated into queries.
+
+### Security Principle
+
+> **Keep data separate from code or commands.**
+
+Attackers often exploit situations where this boundary becomes unclear.
+
+### Important Defense
+
+* Manual escaping can be error-prone.
+* Prefer security mechanisms designed for the specific context:
+
+  * **Parameterized queries** for SQL
+  * Proper HTML output encoding for web content
+  * Trusted libraries/frameworks
+  * Appropriate input validation
+
+---
+
+## Content Security Policy (CSP)
+
+* **Content-Security-Policy (CSP)** is an HTTP response header that helps protect websites against:
+
+  * XSS
+  * Data injection
+  * Other unwanted content execution
+
+### Purpose
+
+CSP tells the browser which sources are trusted for different types of content.
+
+Example:
+
+```http
+Content-Security-Policy: script-src 'self'
+```
+
+* This allows JavaScript to execute only from the website's own origin.
+* As a result, some injected scripts from external sources can be blocked.
+
+### Common CSP Directives
+
+| Directive     | Purpose                             |
+| ------------- | ----------------------------------- |
+| `default-src` | Default/fallback source policy      |
+| `script-src`  | Controls allowed script sources     |
+| `style-src`   | Controls allowed stylesheet sources |
+| `img-src`     | Controls allowed image sources      |
+
+### Security Concept
+
+* CSP provides **defense in depth**.
+* It should not be treated as a replacement for fixing vulnerabilities such as XSS.
+* Ideally, applications should prevent malicious input/output from becoming executable **and** use CSP as an additional browser-level protection.
+
+
+
 ## Tasks to build your Cybersecurity skills
 
 ### Task 1
@@ -117,3 +267,6 @@ Hint: Research database concurrency.
 ### Task 5
 
 The blog application has a buggy API where a user can update another user’s blog. Add authorization to fix the issue.
+
+
+
