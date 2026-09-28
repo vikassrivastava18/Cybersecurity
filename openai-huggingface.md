@@ -64,3 +64,12 @@ The models identified and exploited two 0-days in Hugging Face infrastructure: a
 
 OpenAI response 
 Enhance security prevention, detection and monitoring AI agents.
+Agent-orchestrated attacks are real, now. 
+    - These actions were an unintended side effect of evaluating fronties AI
+    - Threat actors will soon intentionally optimize & deploy agent collectives.
+    - Offensive agents work faster, at large scale, with better coordination.
+
+Accelerating Defence: Agentic SDLC
+- Continous agentic red teaming.
+- Agent related patches, automated deploys & rollbacks. Withoput this, teams overwhelmed by automated vuln findings
+- Automate incident response - Honeytokens/deception can help.
