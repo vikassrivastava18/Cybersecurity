@@ -51,3 +51,16 @@ Validated and shared its location on a message board
 Other agents retrieved it and used repository write access to stage data.
 
 Exploiting antifactory via Ruby gems
+
+
+Hugging Face infrastructure attack
+
+The models identified and exploited two 0-days in Hugging Face infrastructure: a HDF5 vulnerability and Jinja injection vulnerability
+
+- The agents prepared the HDF5 dataset and exploited Hugging Face to acquire credentials from the workers
+    - With the acquired credentials, the agents then performed remote code execution using Jinja injection vulnerability.
+        - The agents went from code execution in a single worker pod to cluster-admin across multiple HF clusters in under 13 hours.
+
+
+OpenAI response 
+Enhance security prevention, detection and monitoring AI agents.
