@@ -73,3 +73,4 @@ Accelerating Defence: Agentic SDLC
 - Continous agentic red teaming.
 - Agent related patches, automated deploys & rollbacks. Withoput this, teams overwhelmed by automated vuln findings
 - Automate incident response - Honeytokens/deception can help.
+- Segmentation, least privilege for agents are vital 
