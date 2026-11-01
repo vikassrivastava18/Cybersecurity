@@ -1,4 +1,10 @@
-## Tasks to build your Cybersecurity skills
+
+## About
+- Understanding Cybersecurity attacks, learing how to spot them and fixing the code.
+- All the projects are built using Flask with minimal code enough to understand an attack.
+
+
+## Tasks to build Cybersecurity skills
 
 ### Task 1
 
